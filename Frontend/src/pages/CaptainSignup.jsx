@@ -14,7 +14,7 @@ function CaptainSignup() {
     e.preventDefault();
 
     setUserData({
-      fullname: {
+      fullName: {
         firstName: firstName,
         lastName: lastName,
       },
@@ -35,6 +35,7 @@ function CaptainSignup() {
       <div>
         <img src={logo} alt="Uber Logo" className="w-20 ml-7 mt-5" />
         <form className='p-7 pt-5 pb-0' onSubmit={ (e)=> submitHandler(e)}>
+        <h3 className='text-lg mb-2 font-medium'>What's your Name</h3>
         <div className='flex gap-2 w-full mb-5'>
             <input
               type="text"
