@@ -1,22 +1,33 @@
 import React from 'react'
 import logo from '../assets/logod.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
+import axios from 'axios';
+import { CaptainDataContext } from '../context/CaptainContext';
 
 function CaptainLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [captainData, setCaptainData] = useState({});
+  const navigate = useNavigate();
+  const { captain, setCaptain } = React.useContext(CaptainDataContext);
 
-  function submitHandler(e) {
+  async function submitHandler(e) {
     e.preventDefault();
     
-    setCaptainData({
-      email:email,
+    const captain = {
+      email: email,
       password: password
-    })
-    console.log(captainData);
+    }
 
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/login`, captain);
+
+    if(response.status === 200) {
+      const data = response.data;
+      console.log(data);
+      setCaptain(data.captain);
+      localStorage.setItem('token', data.token);
+      navigate('/captain-home');
+    }
     setEmail("");
     setPassword("");
     
@@ -27,13 +38,13 @@ function CaptainLogin() {
       <div>
         <img src={logo} alt="Uber Logo" className="w-20 ml-7 mt-5" />
         <form className='p-7 pt-5 pb-0' onSubmit={ (e)=> submitHandler(e)}>
-          <h3 className='text-lg mb-2 font-medium'>What's your email</h3>
+          <h3 className='text-base mb-2 font-medium'>What's your email</h3>
 
           <input
             type="email"
             value={email}
             onChange={(e)=> setEmail(e.target.value)}
-            className='bg-[#eeeeee] rounded px-4 py-1 border w-full text-lg placeholder:text-base mb-7 '
+            className='bg-[#eeeeee] rounded px-4 py-1 border w-full text-base placeholder:text-base mb-7 '
             required
             placeholder='email@example.com'
           />
@@ -45,7 +56,7 @@ function CaptainLogin() {
             required
             value={password}
             onChange={(e)=> setPassword(e.target.value)}
-            className='bg-[#eeeeee] rounded px-4 py-1 border w-full text-lg placeholder:text-base mb-7 '
+            className='bg-[#eeeeee] rounded px-4 py-1 border w-full text-base placeholder:text-base mb-7 '
             placeholder='password'
           />
 

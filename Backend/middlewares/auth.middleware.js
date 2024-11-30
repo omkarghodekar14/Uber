@@ -23,6 +23,10 @@ module.exports.authUser = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await userModel.findById(decoded._id);
 
+        if(user == null) {
+            return res.status(401).json({message: 'unauthorized'});
+        }
+
         req.user = user;
 
         return next();
@@ -51,6 +55,10 @@ module.exports.authCaptain = async (req, res, next) => {
     try{
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const captain = await captainModel.findById(decoded._id);
+
+        if(captain == null) {
+            return res.status(401).json({message: 'unauthorized'});
+        }
 
         req.captain = captain;
 

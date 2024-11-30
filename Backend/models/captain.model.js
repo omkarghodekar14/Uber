@@ -7,18 +7,18 @@ const captainSchema = new mongoose.Schema({
             firstname: {
                 type: String,
                 required: true,
-                minLenght: [3, 'First name must be at least 3 characters long']
+                minLength: [3, 'First name must be at least 3 characters long']
             },
             lastname: { 
                 type: String,
-                minLenght: [3, 'First name must be at least 3 characters long']
+                minLength: [3, 'First name must be at least 3 characters long']
             },
         },
         email: {
             type: String,
             required: true,
             unique: true,
-            minLenght: [5, 'Email must be at least 5 characters long']
+            minLength: [5, 'Email must be at least 5 characters long']
         },
         password: {
             type: String,
@@ -37,12 +37,12 @@ const captainSchema = new mongoose.Schema({
             color: {
                 type: String,
                 required: true,
-                minLenght: [3, 'Color must be atleast 3 characters']
+                minLength: [3, 'Color must be atleast 3 characters']
             },
             plate: {
                 type: String,
                 required: true,
-                minLenght: [3, 'Plate must be at least 3 characters']
+                minLength: [3, 'Plate must be at least 3 characters']
             },
             capacity: {
                 type: Number,
