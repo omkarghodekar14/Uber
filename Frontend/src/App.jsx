@@ -11,10 +11,21 @@ import UserProtectedWrapper from "./pages/UserProtectedWrapper";
 import CaptainHome from "./pages/CaptainHome";
 import CaptainLogout from "./pages/CaptainLogout";
 import CaptainProtectedWrapper from "./pages/CaptainProtectedWrapper";
+import './App.css';
 
 export default function App() {
+
+  const appStyle = {
+    // max-w-[400px] min-w-[250px]
+    minWidth: '250px', // Minimum width
+    maxWidth: '400px', // Maximum width
+    margin: '0 auto', // Center the application
+    width: '100%', // Responsive width
+    overflowX: 'hidden', // Prevent horizontal scroll
+  };
+
   return (
-    <div>
+    <div style={appStyle} className="rounded-xl bg-white">
 
       <Routes>
         <Route path='/' element={<Start />} />
